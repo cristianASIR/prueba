@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_NAME}
+    ports:
+      - "${NGINX_PORT}:80"    # Mapeo del puerto de Nginx
+      - "${SSH_PORT}:22"      # Mapeo del puerto SSH
+    networks:
+      prueba:
+        ipv4_address: 10.110.10.10
+    volumes:
+      - ./html:/var/www/html  # Opcional, para personalizar el contenido de Nginx
+    environment:
+      - ENVIRONMENT=production
+    restart: always
+
+networks:
+  prueba:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${SUBNET}
