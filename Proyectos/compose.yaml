@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     container_name: ${CONTAINER_NAME}
     ports:
@@ -11,9 +11,9 @@ services:
       - "${SSH_PORT}:22"      # Mapeo del puerto SSH
     networks:
       prueba:
-        ipv4_address: 10.110.10.10
+        ipv4_address: 10.110.20.10
     volumes:
-      - ./html:/var/www/html  # Opcional, para personalizar el contenido de Nginx
+      - ../prueba/html:/var/www/html  # Opcional, para personalizar el contenido de Nginx
     environment:
       - ENVIRONMENT=production
     restart: always
